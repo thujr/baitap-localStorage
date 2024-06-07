@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+</head>
+<body>
+    <h1>Thông tin người dùng nhập</h1>
+    <form onsubmit="saveUser(event)">
+        <label for="name">Họ và tên:</label>
+        <input type="text" id="name" placeholder="Nhập tên" required></br>
+        
+        <label for="gmail">Gmail:</label>
+        <input type="email" id="gmail" placeholder="Nhập gmail" required></br>
+        
+        <label for="ID">ID:</label>
+        <input type="number" id="ID" readonly></br>
+        
+        <label for="password">Mật khẩu:</label>
+        <input type="password" id="password" placeholder="Nhập mật khẩu" required></br>
+        
+        <label for="confirmPassword">Nhập lại mật khẩu:</label>
+        <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required></br>
+        
+        <button type="submit">Đăng ký</button>
+    </form>
+
+    <script>
+        function saveUser(event) {
+            let name = document.getElementById('name').value;
+            let gmail = document.getElementById('gmail').value;
+            let ID = Math.floor(Math.random() * 999); 
+            let password = document.getElementById('password').value;
+            let confirmPassword = document.getElementById('confirmPassword').value;
+            if (password !== confirmPassword) {
+                alert('Mật khẩu và mật khẩu xác nhận không khớp.');
+                return;
+            }
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].gmail === gmail) {
+                    alert('Email đã tồn tại. Vui lòng chọn email khác.');
+                    return;
+                }
+            }
+            let user = {
+                ID: ID,
+                name: name,
+                gmail: gmail,
+                password: password
+            };
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Đăng ký thành công!');
+            document.getElementById('name').value = '';
+            document.getElementById('gmail').value = '';
+            document.getElementById('ID').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+    </script>
+</body>
+</html>
+
+</body>
+</html>

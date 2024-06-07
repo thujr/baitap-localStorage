@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BÀI THỰC HÀNH 1</title>
+  </head>
+  <body>
+    <input type="text" id="text" placeholder="Nhập tên cầu thủ:" />
+    <button onclick="addItem()">Thêm cầu thủ</button>
+    <ul id="playerList"></ul>
+    <script>
+      let players = JSON.parse(localStorage.getItem("players")) || [];
+      // kiểm tra xem localSorage có dữ liệu không?
+      renderPlayers();
+      function addItem() {
+        let valuePlayer = document.getElementById("text").value;
+        console.log("Giá trị người:", valuePlayer);
+        players.push(valuePlayer);
+        localStorage.setItem("cầu thu", JSON.stringify(players));
+        // lưu dữ liệu vào localStorage
+        // renderPlayers();
+      }
+      function renderPlayers() {
+        let text = "";
+        for (let i = 0; i < players.length; i++) {
+          text += `<li>${players}</li>`;
+          document.getElementById("playerList").innerHTML = text;
+        }
+      }
+    </script>
+  </body>
+</html>
